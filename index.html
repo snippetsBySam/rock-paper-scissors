@@ -7,16 +7,21 @@
 <body>
   <script>
       function playRound(playerSelection, computerSelection) {
+        // options to check against in array
         selections = ['rock', 'paper', 'scissors'];
+        // that that the play entry is valid
         if (!selections.includes(playerSelection.toLowerCase())) {
           return 'Invalid input. Enter rock, paper or scissors.'
         }
+        // convert to lower case so input case doesn't matter
         let player = playerSelection.toLowerCase();
         let computer = computerSelection.toLowerCase();
+        // draw
         if (player === computer) {
           return `It's a draw! ${playerSelection} equals ${computerSelection}.`;
         }
         else {
+          // win/lose conditions
           let diff = selections.indexOf(player) - selections.indexOf(computer);
           if ((diff == -1) || (diff == 2)) {
             return `You Lose! ${computerSelection} beats ${playerSelection}.`;
@@ -29,8 +34,11 @@
 
 
     function computerPlay() {
+      // define the three possible options in an array
       let selections = ['rock', 'paper', 'scissors'];
+      // pick a random number from 0 - 2 (array loactions)
       let pick = Math.floor(Math.random() * 3);
+      // return the pick at the randomly selected array location
       return selections[pick]
     }
 
