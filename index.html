@@ -7,9 +7,7 @@
 <body>
   <script>
       function playRound(playerSelection, computerSelection) {
-        // options to check against in array
-        selections = ['rock', 'paper', 'scissors'];
-        // that that the play entry is valid
+        // check that the play entry is valid
         if (!selections.includes(playerSelection.toLowerCase())) {
           return 'Invalid input. Enter rock, paper or scissors.'
         }
@@ -18,33 +16,80 @@
         let computer = computerSelection.toLowerCase();
         // draw
         if (player === computer) {
-          return `It's a draw! ${playerSelection} equals ${computerSelection}.`;
+          console.log(`This round is a draw! ${playerSelection} equals ${computerSelection}.`);
+          return `draw`;
         }
         else {
           // win/lose conditions
           let diff = selections.indexOf(player) - selections.indexOf(computer);
           if ((diff == -1) || (diff == 2)) {
-            return `You Lose! ${computerSelection} beats ${playerSelection}.`;
+            console.log(`You Lose this round! ${playerSelection} loses to ${computerSelection}.`);
+            return `lose`;
           }
           else {
-            return `You Win! ${playerSelection} beats ${computerSelection}.`
+            console.log(`You Win this round! ${playerSelection} beats ${computerSelection}.`);
+            return `win`;
           }       
         }
       }
 
-
     function computerPlay() {
-      // define the three possible options in an array
-      let selections = ['rock', 'paper', 'scissors'];
       // pick a random number from 0 - 2 (array locations)
       let pick = Math.floor(Math.random() * 3);
       // return the pick at the randomly selected array location
-      return selections[pick]
+      return selections[pick];
     }
 
-    const playerSelection = 'rock'
-    const computerSelection = computerPlay()
-    console.log(playRound(playerSelection, computerSelection))
+    function game(roundsToPlay) {
+      // reset game parameters
+      playerScore = 0;
+      computerScore = 0;
+      playerChoice = '';
+      computerChoice = '';
+      gameResult = 0;
+      for (let i = 0; i < roundsToPlay; i++) {
+        while (!selections.includes(playerChoice.toLowerCase())) {
+          playerChoice = prompt(`Round ${i + 1}/${roundsToPlay}\nType rock, paper or scissors!`);
+        }
+        computerChoice = computerPlay();
+        gameResult = playRound(playerChoice, computerChoice)
+        if (gameResult === 'win') {
+          playerScore++;
+        }
+        else if (gameResult === 'lose') {
+          computerScore++;
+        }
+        else {
+          playerScore++;
+          computerScore++;
+        }
+        console.log(`Round ${i + 1} score: ${playerScore} - ${computerScore}.\n\n`)
+        playerChoice = '';
+      }
+      if (playerScore > computerScore) {
+        console.log(`Congratulations! You Won the Game!`)
+      }
+      else if (playerScore < computerScore) {
+        console.log(`Unfortunately! You Lost the Game! Better luck next time!`)
+      }
+      else {
+        console.log(`The Game is a Draw!`)
+      }
+      console.log(`Final score: ${playerScore} : ${computerScore}.`)
+
+    }
+    // define the three possible options in an array
+    let playerScore;
+    let computerScore;
+    let playerChoice;
+    let computerChoice;
+    let gameResult;
+    const selections = ['rock', 'paper', 'scissors'];
+    let numberOfRounds = 0;
+    while (numberOfRounds < 1 || numberOfRounds > 50) {
+      numberOfRounds = prompt('How many rounds would you like to play? (1 - 50)');
+    }
+    game(numberOfRounds);
 
   </script>
 </body>
