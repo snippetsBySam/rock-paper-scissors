@@ -17,6 +17,7 @@
         // draw
         if (player === computer) {
           console.log(`This round is a draw! ${playerSelection} equals ${computerSelection}.`);
+          alert(`This round is a draw! ${playerSelection} equals ${computerSelection}.`);
           return `draw`;
         }
         else {
@@ -24,10 +25,12 @@
           let diff = selections.indexOf(player) - selections.indexOf(computer);
           if ((diff == -1) || (diff == 2)) {
             console.log(`You Lose this round! ${playerSelection} loses to ${computerSelection}.`);
+            alert(`You Lose this round! ${playerSelection} loses to ${computerSelection}.`);
             return `lose`;
           }
           else {
             console.log(`You Win this round! ${playerSelection} beats ${computerSelection}.`);
+            alert(`You Win this round! ${playerSelection} beats ${computerSelection}.`);
             return `win`;
           }       
         }
@@ -48,8 +51,9 @@
       computerChoice = '';
       gameResult = 0;
       for (let i = 0; i < roundsToPlay; i++) {
+        playerChoice = prompt(`Round ${i + 1}/${roundsToPlay}\nType rock, paper or scissors!`);
         while (!selections.includes(playerChoice.toLowerCase())) {
-          playerChoice = prompt(`Round ${i + 1}/${roundsToPlay}\nType rock, paper or scissors!`);
+          playerChoice = prompt(`Round ${i + 1}/${roundsToPlay}\nYou must enter rock, paper or scissors!`);
         }
         computerChoice = computerPlay();
         gameResult = playRound(playerChoice, computerChoice)
@@ -64,18 +68,23 @@
           computerScore++;
         }
         console.log(`Round ${i + 1} score: ${playerScore} - ${computerScore}.\n\n`)
+        alert(`Round ${i + 1} score: ${playerScore} - ${computerScore}.`)
         playerChoice = '';
       }
       if (playerScore > computerScore) {
-        console.log(`Congratulations! You Won the Game!`)
+        console.log(`Congratulations! You Won the Game!`);
+        alert(`Congratulations! You Won the Game!`);
       }
       else if (playerScore < computerScore) {
-        console.log(`Unfortunately! You Lost the Game! Better luck next time!`)
+        console.log(`Unfortunately! You Lost the Game! Better luck next time!`);
+        alert(`Unfortunately! You Lost the Game! Better luck next time!`);
       }
       else {
-        console.log(`The Game is a Draw!`)
+        console.log(`The Game is a Draw!`);
+        alert(`The Game is a Draw!`);
       }
-      console.log(`Final score: ${playerScore} : ${computerScore}.`)
+      console.log(`Final score: ${playerScore} : ${computerScore}.`);
+      alert(`Final score: ${playerScore} : ${computerScore}.`);
 
     }
     // game parameters to track
@@ -84,11 +93,13 @@
     let playerChoice;
     let computerChoice;
     let gameResult;
+    const minRounds = 1;
+    const maxRounds = 50;
     // define the three possible options in an array
     const selections = ['rock', 'paper', 'scissors'];
-    let numberOfRounds = 0;
-    while (numberOfRounds < 1 || numberOfRounds > 50) {
-      numberOfRounds = prompt('How many rounds would you like to play? (1 - 50)');
+    let numberOfRounds = Number(prompt(`How many rounds would you like to play? (${minRounds} - ${maxRounds})`, 5));
+    while (numberOfRounds < minRounds || numberOfRounds > maxRounds || isNaN(numberOfRounds)) {
+      numberOfRounds = Number(prompt(`You must enter the number between ${minRounds} and ${maxRounds}`));
     }
     game(numberOfRounds);
 
