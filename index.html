@@ -1,97 +1,48 @@
-<!DOCTYPE html>
-<html>
+<!doctype html>
+<html lang="en">
+
 <head>
-    <meta charset="utf-8">
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+    integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+
   <title>Rock, Paper, Scissors!</title>
 </head>
+
 <body>
-  <script>
-      function playRound(playerSelection, computerSelection) {
-        // check that the play entry is valid
-        if (!selections.includes(playerSelection.toLowerCase())) {
-          return 'Invalid input. Enter rock, paper or scissors.'
-        }
-        // convert to lower case so input case doesn't matter
-        let player = playerSelection.toLowerCase();
-        let computer = computerSelection.toLowerCase();
-        // draw
-        if (player === computer) {
-          console.log(`This round is a draw! ${playerSelection} equals ${computerSelection}.`);
-          return `draw`;
-        }
-        else {
-          // win/lose conditions
-          let diff = selections.indexOf(player) - selections.indexOf(computer);
-          if ((diff == -1) || (diff == 2)) {
-            console.log(`You Lose this round! ${playerSelection} loses to ${computerSelection}.`);
-            return `lose`;
-          }
-          else {
-            console.log(`You Win this round! ${playerSelection} beats ${computerSelection}.`);
-            return `win`;
-          }       
-        }
-      }
+  <div class="container text-center">
+  <h1>Rock, Paper, Scissors!</h1>
+  <div id="score" class="h1">0 - 0</div>
+  <div id="play-buttons">
+    <button id="rock" class="btn btn-primary" type="submit">Rock</button>
+    <button id="paper" class="btn btn-primary" type="submit">Paper</button>
+    <button id="scissors" class="btn btn-primary" type="submit">Scissors</button>
+  </div>
 
-    function computerPlay() {
-      // pick a random number from 0 - 2 (array locations)
-      let pick = Math.floor(Math.random() * 3);
-      // return the pick at the randomly selected array location
-      return selections[pick];
-    }
+  <div>
+    <br>
+    <p id="computer-play"></p>
+    <p id="round-message"></p>
+    <p id="winning-message"></p>
+    <button id="reset" class="btn btn-primary" type="submit">Reset Game</button>
+  </div>
 
-    function game(roundsToPlay) {
-      // reset game parameters
-      playerScore = 0;
-      computerScore = 0;
-      playerChoice = '';
-      computerChoice = '';
-      gameResult = 0;
-      for (let i = 0; i < roundsToPlay; i++) {
-        while (!selections.includes(playerChoice.toLowerCase())) {
-          playerChoice = prompt(`Round ${i + 1}/${roundsToPlay}\nType rock, paper or scissors!`);
-        }
-        computerChoice = computerPlay();
-        gameResult = playRound(playerChoice, computerChoice)
-        if (gameResult === 'win') {
-          playerScore++;
-        }
-        else if (gameResult === 'lose') {
-          computerScore++;
-        }
-        else {
-          playerScore++;
-          computerScore++;
-        }
-        console.log(`Round ${i + 1} score: ${playerScore} - ${computerScore}.\n\n`)
-        playerChoice = '';
-      }
-      if (playerScore > computerScore) {
-        console.log(`Congratulations! You Won the Game!`)
-      }
-      else if (playerScore < computerScore) {
-        console.log(`Unfortunately! You Lost the Game! Better luck next time!`)
-      }
-      else {
-        console.log(`The Game is a Draw!`)
-      }
-      console.log(`Final score: ${playerScore} : ${computerScore}.`)
-
-    }
-    // game parameters to track
-    let playerScore;
-    let computerScore;
-    let playerChoice;
-    let computerChoice;
-    let gameResult;
-    // define the three possible options in an array
-    const selections = ['rock', 'paper', 'scissors'];
-    let numberOfRounds = 0;
-    while (numberOfRounds < 1 || numberOfRounds > 50) {
-      numberOfRounds = prompt('How many rounds would you like to play? (1 - 50)');
-    }
-    game(numberOfRounds);
-
-  </script>
+  <!-- Optional JavaScript -->
+  <script src="scripts.js"></script>
+  <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+    integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
+    integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN"
+    crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
+    integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV"
+    crossorigin="anonymous"></script>
+  </div>
 </body>
 </html>
